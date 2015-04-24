@@ -30,6 +30,7 @@ PLATFORMS
 
 DEPENDENCIES
   httparty
+  json
   nokogiri
   pry
   sinatra
