@@ -6,8 +6,14 @@ class Pauza < Base
   end
 
   def menu
-    to_eat = page_body.xpath("//*[@id='system']/article/div/table").text.gsub("\t","").gsub("\r","").gsub("\n\n","\n").split("\n").reject{|k| k=="" || k=="6,50 €"}.take(8)
-    to_eat.join("\n")
+    page_body.xpath("//*[@id='system']/article/div/table").text
+      .split(/\s{2,}/)
+      .map(&:strip).reject(&:empty?)
+      .drop(1)
+      .each_slice(2)
+      .select {|pair| pair[1] && pair[1].include?("€")}
+      .map {|pair| pair.join(" - ")}
+      .join("\n")
   end
 
 end
