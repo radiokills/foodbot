@@ -8,7 +8,10 @@ class Pizzapub < Restaurant
   def menu
     slider = page_body.at_css(".liquid-slider")
     menu_today = slider.children[latest_workday + (latest_workday - 1 )].css('h6')
-    menu_today.map(&:text).map(&:strip).reject(&:empty?).map {|text| {text: text} }
+    menu_today
+      .map(&:text).map(&:strip)
+      .reject {|text| text.empty? || text.downcase.include?("ponudba") }
+      .map {|text| {text: text} }
   end
 
   def latest_workday
