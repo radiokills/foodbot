@@ -1,8 +1,8 @@
-class Pauza < Base
+class Pauza < Restaurant
 
   def initialize
     @page_url = 'http://www.pauza.si/52-dnevne-malice'
-    @restaurant_name = "Pauza"
+    @name = "Pauza"
   end
 
   def menu
@@ -12,8 +12,7 @@ class Pauza < Base
       .drop(1)
       .each_slice(2)
       .select {|pair| pair[1] && pair[1].include?("€")}
-      .map {|pair| pair.join(" - ")}
-      .join("\n")
+      .map {|pair| {text: pair[0], price: pair[1]}}
   end
 
 end
