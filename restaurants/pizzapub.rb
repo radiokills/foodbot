@@ -12,7 +12,7 @@ class Pizzapub < Restaurant
   end
 
   def latest_workday
-    # monday (1) to saturday (6-
+    # monday (1) to saturday (6)
     [Date.today.wday, 6].min
   end
 
