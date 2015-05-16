@@ -14,9 +14,4 @@ class Pizzapub < Restaurant
       .map {|text| {text: text} }
   end
 
-  def latest_workday
-    # monday (1) to saturday (6)
-    [Date.today.wday, 6].min
-  end
-
 end
