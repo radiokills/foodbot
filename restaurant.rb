@@ -1,6 +1,7 @@
 require 'date'
 require 'httparty'
 require 'nokogiri'
+require 'active_support/core_ext/date/calculations'
 require 'active_support/core_ext/string/multibyte'
 require 'active_support/multibyte/chars'
 
@@ -18,12 +19,14 @@ class Restaurant
   end
 
   def latest_workday
-    # by default, restaurants work monday (1) to friday (5)
-    [Date.today.wday, 5].min
+    weekday = (Date.today.wday - 1) % 7
+
+    # restaurants work monday (0) to friday (4)
+    [weekday, 4].min
   end
 
   def latest_workdate
-    (Date.today - Date.today.wday) + latest_workday
+    Date.today.beginning_of_week + latest_workday
   end
 
   def self.descendants
