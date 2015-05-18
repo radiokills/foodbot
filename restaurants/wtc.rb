@@ -15,7 +15,7 @@ class Wtc < Restaurant
 private
 
   def slovenian_weekday(weekday)
-    %w(ponedeljek torek sreda cetrtek petek)[weekday - 1]
+    %w(ponedeljek torek sreda cetrtek petek)[weekday]
   end
 
 end
