@@ -6,10 +6,10 @@ class Favola < Restaurant
   end
 
   def menu
-    tmp = page_body.xpath("//*[@id='kosilaShow']/div")
-	.map{|div| div.text()}[Date.today.wday - 1]
-	.split(/\*\*\*/)
-	.map {|text| {text: text} }
+    page_body.xpath("//*[@id='kosilaShow']/div")
+      .map{|div| div.text()}[latest_workday]
+      .split(/\*\*\*/)
+      .map {|text| {text: text} }
   end
 
 end
