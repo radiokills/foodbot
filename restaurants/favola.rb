@@ -10,7 +10,6 @@ class Favola < Restaurant
 	.map{|div| div.text()}[Date.today.wday - 1]
 	.split(/\*\*\*/)
 	.map {|text| {text: text} }
-binding.pry
   end
 
 end
