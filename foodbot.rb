@@ -14,6 +14,7 @@ class Foodbot
   def respond_to(command)
     if command == "all"
       Parallel.map(@restaurants.values) {|res| res.menu_text }
+              .join("\n")
               .tap {|text| post_to_slack(text)}
     elsif @restaurants[command]
       post_to_slack(@restaurants[command].menu_text)
