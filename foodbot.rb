@@ -14,10 +14,9 @@ class Foodbot
   def respond_to(command)
     if command == "all"
       Parallel.map(@restaurants.values) {|res| res.menu_text }
-              .push("\n_#{BonApetit.random}_").join("\n")
               .tap {|text| post_to_slack(text)}
     elsif @restaurants[command]
-      post_to_slack(@restaurants[command].menu_text + "\n\n_#{BonApetit.random}_")
+      post_to_slack(@restaurants[command].menu_text)
     elsif command.empty?
       post_to_slack("You can use foodbot with the following params: #{@commands.join(', ')}")
     else

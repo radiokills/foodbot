@@ -14,4 +14,5 @@ foodbot = Foodbot.new(restaurants)
 post "/" do
   command = params[:text].downcase
   foodbot.respond_to(command)
+  BonApetit.random
 end
