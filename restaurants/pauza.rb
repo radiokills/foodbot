@@ -6,13 +6,11 @@ class Pauza < Restaurant
   end
 
   def menu
-    page_body.xpath("//*[@id='system']/article/div/table").text
-      .split(/\s{2,}/)
-      .map(&:strip).reject(&:empty?)
+    page_body.xpath("//*[@id='system']/article/div/table/tbody/tr")
+      .map{|element| element.text.gsub(/\n|\r|\t/,' ').squeeze(' ').strip}
+      .reject(&:empty?)
       .drop(1)
-      .each_slice(2)
-      .select {|pair| pair[1] && pair[1].include?("€")}
-      .map {|pair| {text: pair[0], price: pair[1]}}
+      .map {|txt| {text: txt}}
   end
 
 end
